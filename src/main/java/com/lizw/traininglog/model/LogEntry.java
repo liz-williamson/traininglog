@@ -24,7 +24,9 @@ public class LogEntry {
     @Column(nullable = false)
     private LocalDate date;
 
-    private boolean isRaceDay;
+    @Column(nullable = false)
+    private Boolean isRaceDay;
+
     private String meetName;
     private String notes;
 }

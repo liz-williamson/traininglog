@@ -33,7 +33,8 @@ public class RaceResult {
     @Column(nullable = false)
     private String finishTime;
 
-    private boolean isPr;
+    @Column(nullable = false)
+    private Boolean isPr;
 
     private Short place;
 
