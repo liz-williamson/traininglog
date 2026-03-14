@@ -42,6 +42,15 @@ public class NutritionEntryController {
         return nutritionEntryRepository.save(nutritionEntry);
     }
 
+    @PutMapping("/{id}")
+    public NutritionEntry updateEntry(@PathVariable Long id, @RequestBody NutritionEntry updated) {
+        if (!nutritionEntryRepository.existsById(id)) {
+            throw new RuntimeException("Entry not found");
+        }
+        updated.setId(id);
+        return nutritionEntryRepository.save(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteEntry(@PathVariable Long id) {
         nutritionEntryRepository.deleteById(id);

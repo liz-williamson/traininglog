@@ -42,6 +42,15 @@ public class WellbeingEntryController {
         return wellbeingEntryRepository.save(wellbeingEntry);
     }
 
+    @PutMapping("/{id}")
+    public WellbeingEntry updateEntry(@PathVariable Long id, @RequestBody WellbeingEntry updated) {
+        if (!wellbeingEntryRepository.existsById(id)) {
+            throw new RuntimeException("Entry not found");
+        }
+        updated.setId(id);
+        return wellbeingEntryRepository.save(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteEntry(@PathVariable Long id) {
         wellbeingEntryRepository.deleteById(id);

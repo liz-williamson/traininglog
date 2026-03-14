@@ -42,6 +42,15 @@ public class RaceResultController {
         return raceResultRepository.save(raceResult);
     }
 
+    @PutMapping("/{id}")
+    public RaceResult updateEntry(@PathVariable Long id, @RequestBody RaceResult updated) {
+        if (!raceResultRepository.existsById(id)) {
+            throw new RuntimeException("Entry not found");
+        }
+        updated.setId(id);
+        return raceResultRepository.save(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteEntry(@PathVariable Long id) {
         raceResultRepository.deleteById(id);

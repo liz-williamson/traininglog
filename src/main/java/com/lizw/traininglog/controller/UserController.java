@@ -32,6 +32,15 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    @PutMapping("/{id}")
+    public User updateEntry(@PathVariable Long id, @RequestBody User updated) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("User not found");
+        }
+        updated.setId(id);
+        return userRepository.save(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);

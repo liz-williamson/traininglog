@@ -42,6 +42,15 @@ public class WorkoutEntryController {
         return workoutEntryRepository.save(workoutEntry);
     }
 
+    @PutMapping("/{id}")
+    public WorkoutEntry updateEntry(@PathVariable Long id, @RequestBody WorkoutEntry updated) {
+        if (!workoutEntryRepository.existsById(id)) {
+            throw new RuntimeException("Entry not found");
+        }
+        updated.setId(id);
+        return workoutEntryRepository.save(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteEntry(@PathVariable Long id) {
         workoutEntryRepository.deleteById(id);

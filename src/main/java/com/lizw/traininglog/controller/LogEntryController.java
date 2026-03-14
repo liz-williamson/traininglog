@@ -42,6 +42,15 @@ public class LogEntryController {
         return logEntryRepository.save(logEntry);
     }
 
+    @PutMapping("/{id}")
+    public LogEntry updateEntry(@PathVariable Long id, @RequestBody LogEntry updated) {
+        if (!logEntryRepository.existsById(id)) {
+            throw new RuntimeException("Entry not found");
+        }
+        updated.setId(id);
+        return logEntryRepository.save(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteEntry(@PathVariable Long id) {
         logEntryRepository.deleteById(id);
